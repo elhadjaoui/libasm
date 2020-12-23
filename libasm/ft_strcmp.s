@@ -4,15 +4,17 @@ _ft_strcmp :
 xor rax,rax
 loop:
 			mov bl, rsi[rax]
-			cmp rdi[rax],bl
+			mov cl, rdi[rax]
+			cmp cl,bl
 			jne check			;jump if not equal to check
 			je  check2
 			
 check : 
-			sub rdi,'0'
-			sub rsi,'0'
-			sub rdi,rsi
-			mov rax,rdi
+			sub cl,0
+			sub bl,0
+			sub cl,bl
+			movsx rax, cl
+			;mov al, cl
 			ret
 check2 :
 			cmp rdi[rax + 1],byte 0
