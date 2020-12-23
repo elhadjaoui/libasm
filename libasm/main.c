@@ -11,8 +11,8 @@
 
 int main()
 {
-	char *s  = "zsimo";
-	char *k = "aimo";
+	char *s  = "\xff\xff";
+	char *k = "\xff\xf";
 	printf("%d\n",ft_strcmp(k,s));
 	printf("%d\n",strcmp(k,s));
 	return(1);

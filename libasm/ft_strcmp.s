@@ -5,27 +5,27 @@ xor rax,rax
 loop:
 			mov bl, rsi[rax]
 			mov cl, rdi[rax]
-			cmp cl,bl
-			jne check			;jump if not equal to check
-			je  check2
+			cmp bl,byte 0
+			je  check
+			cmp cl,byte 0
+			je  check
+			cmp bl,cl
+			jne check
+			inc rax
+			jmp loop
 			
-check : 
-			sub cl,0
-			sub bl,0
-			sub cl,bl
-			movsx rax, cl
-			;mov al, cl
+positive : 
+			mov rax,1
 			ret
-check2 :
-			cmp rdi[rax + 1],byte 0
-			je second
-			inc rax				;increment rax
-			jmp loop
-second : 
-			cmp rsi[rax + 1],byte 0
-			je return
-			jmp loop
-
+negative :  
+			mov rax,-1
+			ret
+check :
+			cmp cl,bl
+			ja positive
+			cmp cl,bl
+			jb negative
+			jmp return
 return :	
 			mov rax,0
 			ret
